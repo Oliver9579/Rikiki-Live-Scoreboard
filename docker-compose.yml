@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: rikiki-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - rikiki-network
+
+  frontend:
+    build: ./frontend
+    container_name: rikiki-frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - rikiki-network
+    depends_on:
+      - backend
+
+networks:
+  rikiki-network:
+    driver: bridge
